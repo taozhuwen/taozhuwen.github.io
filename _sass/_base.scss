@@ -8,9 +8,7 @@ dl, dd, ol, ul, figure {
     padding: 0;
 }
 
-html, body{
-    height: 100%;
-}
+
 
 /**
  * Basic styling
@@ -91,21 +89,16 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-    color: #e33;
+    color: $brand-color;
     text-decoration: none;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 2px;
+
+    &:visited {
+        color: darken($brand-color, 15%);
+    }
 
     &:hover {
-        &::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            border-top: 1px solid;
-        }
+        color: $text-color;
+        text-decoration: underline;
     }
 }
 
@@ -128,23 +121,56 @@ blockquote {
 }
 
 
-pre {
-    font-family: 'Open Sans', sans-serif;
-    max-width: 540px;
-    display: block;
-    font-size: 0.875em;
-    font-family: Consolas;
-    color: #333;
-    line-height: 1.3em;
-    margin: 0px auto;
-    padding: 0 10px;
+
+/**
+ * Code formatting
+ */
+pre,
+code {
+    font-size: 15px;
+    border: 1px solid $grey-color-light;
+    border-radius: 3px;
+    background-color: #eef;
 }
 
 code {
-    background: #fafafd;
-    padding: 0.063em;
-    border: 0.063em solid #dedede;
+    padding: 1px 5px;
 }
+
+pre {
+    padding: 8px 12px;
+    overflow-x: scroll;
+
+    > code {
+        border: 0;
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+
+
+/**
+ * Wrapper
+ */
+.wrapper {
+    max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
+    max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: $spacing-unit;
+    padding-left: $spacing-unit;
+    @extend %clearfix;
+
+    @include media-query($on-laptop) {
+        max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
+        max-width:         calc(#{$content-width} - (#{$spacing-unit}));
+        padding-right: $spacing-unit / 2;
+        padding-left: $spacing-unit / 2;
+    }
+}
+
+
 
 /**
  * Clearfix
